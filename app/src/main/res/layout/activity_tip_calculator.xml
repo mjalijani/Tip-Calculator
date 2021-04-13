@@ -30,7 +30,10 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/content_tip_calculator" />
+        <include
+            android:id="@+id/content"
+            layout="@layout/content_tip_calculator"
+            app:vm="@{vm}" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
