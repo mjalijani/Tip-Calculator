@@ -13,4 +13,5 @@
     <string name="check">check</string>
     <string name="tip">tip</string>
     <string name="total">total</string>
+    <string name="dollar_amount">$%1$.02f</string>
 </resources>

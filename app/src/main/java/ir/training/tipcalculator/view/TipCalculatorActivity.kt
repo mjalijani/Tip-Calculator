@@ -13,7 +13,7 @@ class TipCalculatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tip_calculator)
-        binding.vm = CalculatorViewModel()
+        binding.vm = CalculatorViewModel(application)
         setSupportActionBar(binding.toolbar)
 
     }

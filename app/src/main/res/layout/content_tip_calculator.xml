@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-    <variable
-        name="vm"
-        type="ir.training.tipcalculator.viewmodel.CalculatorViewModel" />
+
+        <variable
+            name="vm"
+            type="ir.training.tipcalculator.viewmodel.CalculatorViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="30dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <EditText
-            android:text="@={vm.inputCheckAmount}"
             android:id="@+id/input_check_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/check"
             android:inputType="numberDecimal"
+            android:text="@={vm.inputCheckAmount}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:text="@={vm.inputTipPercentage}"
             android:id="@+id/input_tip_percentage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="@string/tip_percentage"
+            android:text="@={vm.inputTipPercentage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_check_amount" />
@@ -55,7 +56,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="$20.00" />
+                    android:text="@{vm.outputCheckAmount}"
+                    tools:text="$20.00" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -78,7 +80,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="$1.50" />
+                    android:text="@{vm.outputTipAmount}"
+                    tools:text="$1.50" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -101,7 +104,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="$21.50" />
+                    android:text="@{vm.outputTotallDollarAmount}"
+                    tools:text="$21.50" />
 
                 <TextView
                     android:layout_width="match_parent"
