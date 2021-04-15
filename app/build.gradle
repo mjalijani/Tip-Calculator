@@ -46,6 +46,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     kapt "com.android.databinding:compiler:$android_plugin"
+    testImplementation "android.arch.core:core-testing:$arch_comp"
     testImplementation 'junit:junit:4.+'
     testImplementation "org.mockito:mockito-core:$mockito"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
