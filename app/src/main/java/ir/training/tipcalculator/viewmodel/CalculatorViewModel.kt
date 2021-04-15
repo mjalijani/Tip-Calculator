@@ -1,12 +1,14 @@
 package ir.training.tipcalculator.viewmodel
 
 import android.app.Application
-import androidx.databinding.BaseObservable
 import ir.training.tipcalculator.R
 import ir.training.tipcalculator.model.Calculator
 import ir.training.tipcalculator.model.TipCalculation
 
-class CalculatorViewModel(val app: Application,val calculator: Calculator = Calculator()) : BaseObservable() {
+class CalculatorViewModel @JvmOverloads constructor(
+    private val app: Application,
+    private val calculator: Calculator = Calculator()
+) : ObservableViewModel(app) {
     var inputCheckAmount = ""
     var inputTipPercentage = ""
     var tipCalculation = TipCalculation()
@@ -19,9 +21,12 @@ class CalculatorViewModel(val app: Application,val calculator: Calculator = Calc
     }
 
     private fun updateOutPuts(tc: TipCalculation) {
-        outputCheckAmount = app.getString(R.string.dollar_amount,tc.checkAmount)
-        outputTipAmount = app.getString(R.string.dollar_amount,tc.tipAmount)
-        outputTotallDollarAmount = app.getString(R.string.dollar_amount,tc.grandTotal)
+        outputCheckAmount =
+            getApplication<Application>().getString(R.string.dollar_amount, tc.checkAmount)
+        outputTipAmount =
+            getApplication<Application>().getString(R.string.dollar_amount, tc.tipAmount)
+        outputTotallDollarAmount =
+            getApplication<Application>().getString(R.string.dollar_amount, tc.grandTotal)
     }
 
     fun calculateTip() {
