@@ -14,4 +14,7 @@
     <string name="tip">tip</string>
     <string name="total">total</string>
     <string name="dollar_amount">$%1$.02f</string>
+    <string name="enter_location">Enter location</string>
+    <string name="cancel">cancel</string>
+    <string name="save">save</string>
 </resources>
