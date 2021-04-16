@@ -10,7 +10,6 @@
             type="ir.training.tipcalculator.viewmodel.CalculatorViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -118,6 +117,20 @@
 
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/calculation_name"
+            style="@style/Base.TextAppearance.AppCompat.Headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@{vm.locationName}"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calculation_name"
+            tools:text="Veggie Palace" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

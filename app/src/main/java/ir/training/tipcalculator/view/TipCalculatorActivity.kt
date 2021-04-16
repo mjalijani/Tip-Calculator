@@ -43,6 +43,7 @@ class TipCalculatorActivity : AppCompatActivity(), SaveDialogFragment.Callback {
     }
 
     override fun onSaveTip(name: String) {
+        binding.vm?.saveCurrentTip(name)
         Snackbar.make(binding.root, "saved $name", Snackbar.LENGTH_SHORT).show()
     }
 

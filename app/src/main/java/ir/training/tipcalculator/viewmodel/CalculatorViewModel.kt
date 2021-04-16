@@ -9,24 +9,44 @@ class CalculatorViewModel @JvmOverloads constructor(
     private val app: Application,
     private val calculator: Calculator = Calculator()
 ) : ObservableViewModel(app) {
+
+    private var lastTipCalculation = TipCalculation()
+
     var inputCheckAmount = ""
     var inputTipPercentage = ""
-    var tipCalculation = TipCalculation()
-    var outputCheckAmount = ""
-    var outputTipAmount = ""
-    var outputTotallDollarAmount = ""
+    val outputCheckAmount
+        get() = getApplication<Application>().getString(
+            R.string.dollar_amount,
+            lastTipCalculation.checkAmount
+        )
+    val outputTipAmount
+        get() = getApplication<Application>().getString(
+            R.string.dollar_amount,
+            lastTipCalculation.tipAmount
+        )
+    val outputTotallDollarAmount
+        get() = getApplication<Application>().getString(
+            R.string.dollar_amount,
+            lastTipCalculation.grandTotal
+        )
+
+    val locationName get() = lastTipCalculation.locationName
 
     init {
         updateOutPuts(TipCalculation())
     }
 
+    fun saveCurrentTip(name: String) {
+        val tipToSave = lastTipCalculation.copy(locationName = name)
+            calculator.saveTipCalculation(tipToSave)
+
+        updateOutPuts(tipToSave)
+
+    }
+
     private fun updateOutPuts(tc: TipCalculation) {
-        outputCheckAmount =
-            getApplication<Application>().getString(R.string.dollar_amount, tc.checkAmount)
-        outputTipAmount =
-            getApplication<Application>().getString(R.string.dollar_amount, tc.tipAmount)
-        outputTotallDollarAmount =
-            getApplication<Application>().getString(R.string.dollar_amount, tc.grandTotal)
+        lastTipCalculation = tc
+        notifyChange()
     }
 
     fun calculateTip() {
@@ -37,7 +57,6 @@ class CalculatorViewModel @JvmOverloads constructor(
         if (checkAmount != null && tipPct != null) {
 //            Log.d(TAG, "checkAmount: $checkAmount & tipPercentage: $tipPct")
             updateOutPuts(calculator.calculateTip(checkAmount, tipPct))
-            notifyChange()
 //            clearInputs()
         }
 
