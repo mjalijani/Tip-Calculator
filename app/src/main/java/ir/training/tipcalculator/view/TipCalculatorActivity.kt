@@ -11,7 +11,8 @@ import ir.training.tipcalculator.R
 import ir.training.tipcalculator.databinding.ActivityTipCalculatorBinding
 import ir.training.tipcalculator.viewmodel.CalculatorViewModel
 
-class TipCalculatorActivity : AppCompatActivity(), SaveDialogFragment.Callback {
+class TipCalculatorActivity : AppCompatActivity(), SaveDialogFragment.Callback,
+    LoadDialogFragment.Callback {
 
     lateinit var binding: ActivityTipCalculatorBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,28 +24,43 @@ class TipCalculatorActivity : AppCompatActivity(), SaveDialogFragment.Callback {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_tip_calculator , menu)
+        menuInflater.inflate(R.menu.menu_tip_calculator, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.action_save ->{
+        return when (item.itemId) {
+            R.id.action_save -> {
                 showSaveDialog()
+                true
+            }
+            R.id.action_load -> {
+                showLoadDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    private fun showLoadDialog() {
+        val loadFragment = LoadDialogFragment()
+        loadFragment.show(supportFragmentManager, "LoadDialog")
+    }
+
     private fun showSaveDialog() {
         val saveFragment = SaveDialogFragment()
-        saveFragment.show(supportFragmentManager,"SaveDialog")
+        saveFragment.show(supportFragmentManager, "SaveDialog")
     }
+
 
     override fun onSaveTip(name: String) {
         binding.vm?.saveCurrentTip(name)
         Snackbar.make(binding.root, "saved $name", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onTipSelected(name: String) {
+        binding.vm?.loadTipCalculation(name)
+        Snackbar.make(binding.root, "loaded $name", Snackbar.LENGTH_SHORT).show()
     }
 
 }

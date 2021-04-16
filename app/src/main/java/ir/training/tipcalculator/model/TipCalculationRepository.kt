@@ -19,4 +19,10 @@ class TipCalculationRepository {
         liveData.value = savedTips.values.toList()
         return liveData
     }
+
+    fun loadSavedTipCalculations() : LiveData<List<TipCalculation>> {
+        val liveData = MutableLiveData<List<TipCalculation>>()
+        liveData.value = savedTips.values.toList()
+        return liveData
+    }
 }

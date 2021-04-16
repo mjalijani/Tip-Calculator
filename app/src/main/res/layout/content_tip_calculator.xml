@@ -39,6 +39,7 @@
             app:layout_constraintTop_toBottomOf="@id/input_check_amount" />
 
         <LinearLayout
+            android:id="@+id/calculation_outputs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -129,7 +130,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calculation_name"
+            app:layout_constraintTop_toBottomOf="@id/calculation_outputs"
             tools:text="Veggie Palace" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

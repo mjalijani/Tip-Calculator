@@ -1,6 +1,8 @@
 package ir.training.tipcalculator.viewmodel
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import ir.training.tipcalculator.R
 import ir.training.tipcalculator.model.Calculator
 import ir.training.tipcalculator.model.TipCalculation
@@ -11,7 +13,7 @@ class CalculatorViewModel @JvmOverloads constructor(
 ) : ObservableViewModel(app) {
 
     private var lastTipCalculation = TipCalculation()
-
+    private var lastTipCalculated = TipCalculation()
     var inputCheckAmount = ""
     var inputTipPercentage = ""
     val outputCheckAmount
@@ -38,7 +40,7 @@ class CalculatorViewModel @JvmOverloads constructor(
 
     fun saveCurrentTip(name: String) {
         val tipToSave = lastTipCalculation.copy(locationName = name)
-            calculator.saveTipCalculation(tipToSave)
+        calculator.saveTipCalculation(tipToSave)
 
         updateOutPuts(tipToSave)
 
@@ -68,4 +70,32 @@ class CalculatorViewModel @JvmOverloads constructor(
 
     }
 
+    fun loadSavedTipCalculationSummaries(): LiveData<List<TipCalculationSummaryItem>> {
+        return Transformations.map(calculator.loadSavedTipCalculations()) { tipCalculationObjects ->
+            tipCalculationObjects.map {
+                TipCalculationSummaryItem(
+                    it.locationName,
+                    getApplication<Application>().getString(R.string.dollar_amount, it.grandTotal)
+                )
+            }
+        }
+    }
+
+    fun loadTipCalculation(name: String) {
+
+        val tc = calculator.loadTipCalculationByLocationName(name)
+
+        if (tc != null) {
+            inputCheckAmount = tc.checkAmount.toString()
+            inputTipPercentage = tc.tipPct.toString()
+
+            updateOutputs(tc)
+            notifyChange()
+        }
+    }
+
+    private fun updateOutputs(tc: TipCalculation) {
+        lastTipCalculated = tc
+        notifyChange()
+    }
 }

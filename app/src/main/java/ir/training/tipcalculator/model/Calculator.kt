@@ -33,4 +33,13 @@ class Calculator(private val repository: TipCalculationRepository = TipCalculati
     fun loadSavedTips(): LiveData<List<TipCalculation>> {
         return repository.loadSavedTips()
     }
+
+    fun loadSavedTipCalculations() : LiveData<List<TipCalculation>> {
+        return repository.loadSavedTipCalculations()
+    }
+
+    fun loadTipCalculationByLocationName(locationName: String) : TipCalculation? {
+        return repository.loadTipCalculationByName(locationName)
+    }
+
 }
